@@ -4,4 +4,4 @@ const AuthRoles = {
     USER : "USER"
 }
 
-export default AuthRoles;
+export default AuthRoles ;
