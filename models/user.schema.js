@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import AuthRoles from "../utils/authRoles";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const userSchema = mongoose.Schema(
     {
@@ -28,8 +30,15 @@ const userSchema = mongoose.Schema(
         forgotPasswordExpiry : Date
     },
     {
-        timestamps : true
+        timestamps : true // Mongoose will add two properties of type Date to your schema: 1-createdAt , 2-updatedAt
     }
-)
+);
+
+// Challenge -1 encrpt the password 
+userSchema.pre("save", async function(next){
+    if(!this.modified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+});
 
 export default mongoose.model("User", userSchema);
