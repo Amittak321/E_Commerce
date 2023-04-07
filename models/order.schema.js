@@ -38,7 +38,9 @@ const orderSchema = new mongoose.Schema({
         type: String,
         enum : ["ORDERED","SHIIPPED","DELIVERED","CANCELLED"],  // NEED TO CREATE LIKE AUTHROLS
         default : "ORDERED"
-    }
+    },
+
+    //paymentMode 
 },
 {
     timestamps : true
