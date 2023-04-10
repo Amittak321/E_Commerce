@@ -1,4 +1,3 @@
-import { syncIndexes } from "mongoose";
 import User from "../models/user.schema";
 import asyncHandler from "../services/asyncHandler";
 import CustomError from "../utils/customError";
