@@ -222,12 +222,10 @@ export const resetPassword = asyncHandler(async (req, res) => {
     await user.save();
 
     //create a token and send it user
-
     const token = user.getJwtToken();
     user.password = undefined;
 
     //hepler method for cookie can be added 
-
     res.cookie("token", token, cookieOptions)
     res.status(200).json({
       success : true,
