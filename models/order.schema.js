@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import OrderRoles from "../utils/orederRoles";
 
 const orderSchema = new mongoose.Schema({
     products :{
@@ -36,7 +37,8 @@ const orderSchema = new mongoose.Schema({
     transactionId:String,
     status:{
         type: String,
-        enum : ["ORDERED","SHIIPPED","DELIVERED","CANCELLED"],  // NEED TO CREATE LIKE AUTHROLS
+        // enum : ["ORDERED","SHIIPPED","DELIVERED","CANCELLED"],  // NEED TO CREATE LIKE AUTHROLS
+        emu : Object.values(OrderRoles),  //Done
         default : "ORDERED"
     },
 
