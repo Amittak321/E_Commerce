@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import config from "./index";
+import config from "./index.js";
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
