@@ -8,6 +8,7 @@ import asyncHandler from "../services/asyncHandler.js";
 import CustomError from "../utils/customError.js";
 import config from "../config/index.js";
 import { resolveSoa } from "dns";
+import { findSourceMap } from "module";
 
 /************************************************************
 
@@ -82,4 +83,72 @@ export const addPorduct = asyncHandler(async (req, res) => {
         })
     }
   })
-})
+});
+
+
+
+/************************************************************
+
+@GET_PRODUCT
+@route http://localhost:4000/api/product
+@description Controller used for getting all the products details
+@description user and admin can get single products details 
+@parameters 
+@return product object
+
+*************************************************************/
+
+export const getAllProducts = asyncHandler(async(_req,res)=>{
+    const products = await Product.find();
+
+    if (!products)  {
+        throw new CustomError("No products found", 404);
+    }
+
+    res.status(200).json({
+        success:true,
+        products
+    })
+});
+
+/************************************************************
+
+@GET_PRODUCT_BY_ID
+@route http://localhost:4000/api/product
+@description Controller used for getting single products details
+@description user and admin can get single products details 
+@return product object
+
+*************************************************************/
+
+export const getProductById = asyncHandler(async(req,res)=>{
+   const id =  req.params.id
+
+   if (!id) {
+    throw new CustomError("id is missing", 400);
+   }
+    const product = await Product.findById(id);
+
+    if (!product)  {
+        throw new CustomError("No product found", 404);
+    }
+
+    res.status(200).json({
+        success:true,
+        product
+    })
+});
+
+/*
+
+TODO: assignment to read
+
+model.aggregate([{},{},{},])
+
+$group
+$push
+$ROOT
+$lookup
+$project
+
+*/
